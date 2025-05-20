@@ -1,4 +1,3 @@
-
 local local_plugins = {
     {
 
@@ -10,7 +9,7 @@ local local_plugins = {
 
             harpoon:setup()
 
-            vim.keymap.set("n", "<leader>a", function() harpoon:list():append() end)
+            vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end)
             vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
 
             vim.keymap.set("n", "<C-j>", function() harpoon:list():select(1) end)
@@ -18,17 +17,6 @@ local local_plugins = {
             vim.keymap.set("n", "<C-l>", function() harpoon:list():select(3) end)
             vim.keymap.set("n", "<C-f>", function() harpoon:list():select(4) end)
             vim.keymap.set("n", "<C-s>", function() harpoon:list():select(5) end)
-        end
-    },
-    {
-        "vim-apm", dir = "~/personal/vim-apm",
-        config = function()
-            --[[
-            local apm = require("vim-apm")
-
-            apm:setup({})
-            vim.keymap.set("n", "<leader>apm", function() apm:toggle_monitor() end)
-            --]]
         end
     },
 }

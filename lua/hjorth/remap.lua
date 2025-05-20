@@ -41,3 +41,11 @@ vim.keymap.set("n", "<leader>mr", "<cmd>CellularAutomaton make_it_rain<CR>");
 vim.keymap.set("n", "<leader><leader>", function()
     vim.cmd("so")
 end)
+
+-------------------
+-- CUSTOM MACROS --
+-------------------
+
+local esc = vim.api.nvim_replace_termcodes("<Esc>", true, true, true)
+
+vim.fn.setreg("l", "yoconsole.log('" .. esc .. "pa: ', " .. esc .. "pa)")

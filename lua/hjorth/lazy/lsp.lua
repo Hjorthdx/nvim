@@ -27,11 +27,11 @@ return {
         require("mason-lspconfig").setup({
             ensure_installed = {
                 "lua_ls",
-                "rust_analyzer",
                 "tailwindcss",
                 "eslint",
                 "cssls",
-                "tsserver",
+                "ts_ls",
+                "biome",
             },
             handlers = {
                 function(server_name) -- default handler (optional)
@@ -53,6 +53,15 @@ return {
                         }
                     }
                 end,
+                ["biome"] = function()
+                    require 'lspconfig'.biome.setup {
+                        capabilities = capabilities,
+                        cmd = { "biome", "lsp-proxy" },
+                        filetypes = { "astro", "css", "graphql", "javascript", "javascriptreact", "json", "jsonc", "svelte", "typescript", "typescript.tsx", "typescriptreact", "vue" },
+                        root_dir = require('lspconfig').util.root_pattern(".git"),
+                        single_file_support = false,
+                    }
+                end
             }
         })
 
