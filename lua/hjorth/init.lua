@@ -3,16 +3,26 @@ require("hjorth.remap")
 
 require("hjorth.lazy_init")
 
--- DO.not
--- DO NOT INCLUDE THIS
+-- Configure diagnostic display
+vim.diagnostic.config({
+    virtual_text = true,      -- Show diagnostics as virtual text
+    signs = true,             -- Show signs in the sign column
+    underline = true,         -- Underline text with issues
+    update_in_insert = false, -- Update diagnostics in insert mode
+    severity_sort = true,     -- Sort diagnostics by severity
+    float = {
+        border = "rounded",
+        source = "always",
+    },
+})
 
--- If i want to keep doing lsp debugging
--- function restart_htmx_lsp()
---     require("lsp-debug-tools").restart({ expected = {}, name = "htmx-lsp", cmd = { "htmx-lsp", "--level", "DEBUG" }, root_dir = vim.loop.cwd(), });
--- end
+-- Add diagnostic symbols to sign column
+local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+for type, icon in pairs(signs) do
+    local hl = "DiagnosticSign" .. type
+    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
 
--- DO NOT INCLUDE THIS
--- DO.not
 
 local augroup = vim.api.nvim_create_augroup
 local ThePrimeagenGroup = augroup('ThePrimeagen', {})
@@ -59,8 +69,8 @@ autocmd('LspAttach', {
         vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, opts)
         vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
         vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
-        vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
-        vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
+        vim.keymap.set("n", "<C-j>", function() vim.diagnostic.goto_next() end, opts)
+        vim.keymap.set("n", "<C-k>", function() vim.diagnostic.goto_prev() end, opts)
     end
 })
 

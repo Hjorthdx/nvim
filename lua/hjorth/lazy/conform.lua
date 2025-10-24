@@ -14,12 +14,11 @@ return {
             formatters = {
                 biome = {
                     command = "biome",
-                    args = { "check", "--formatter-enabled=true", "--linter-enabled=false", "--organize-imports-enabled=treu", "--write", "--stdin-file-path", "$FILENAME" },
+                    args = { "check", "--formatter-enabled=true", "--linter-enabled=false", "--organize-imports-enabled=true", "--write", "--stdin-file-path", "$FILENAME" },
                 },
             },
             format_on_save = {
                 timeout_ms = 500,
-                lsp_format = "fallback",
             },
         })
     end
